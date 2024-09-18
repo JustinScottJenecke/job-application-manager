@@ -6,10 +6,8 @@ import lombok.*;
 import java.util.Date;
 import java.util.List;
 
-@Data
 @NoArgsConstructor
-@ToString
-@EqualsAndHashCode
+@Data
 public class JobApplication {
     private Integer id;
     private String position;
