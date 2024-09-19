@@ -1,6 +1,5 @@
 package io.github.justinscottjenecke.job_application_manager.model;
 
-
 import lombok.*;
 
 import java.util.Date;

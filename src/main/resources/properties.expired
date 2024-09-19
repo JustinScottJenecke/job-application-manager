@@ -1,0 +1,25 @@
+#spring.application.name=job-application-manager
+#
+#spring.jpa.properties.hibernate.format_sql=true
+#spring.datasource.url=jdbc:sqlserver://localhost:1443;serverName=DESKTOP-E1M122C;databaseName=job-application-manager-db;integratedSecurity=true
+#spring.datasource.driverClassName=com.microsoft.sqlserver.jdbc.SQLServerDriver
+#spring.jpa.hibernate.dialect=org.hibernate.dialect.SQLServerDialect
+#spring.jpa.show-sql=true
+#spring.jpa.properties.hibernate.boot.allow_jdbc_metadata_access=true
+#spring.jpa.hibernate.ddl-auto=create-drop
+#
+
+
+# spring.datasource.url=jdbc:sqlserver://;serverName=localhost;databaseName=booksdb;encrypt=true;trustServerCertificate=true;
+
+# - jdbc datasource config -
+
+# spring.datasource.url=jdbc:sqlserver://sqlsrv\\sqlexpress;databaseName=customer
+# spring.datasource.username=username
+# spring.datasource.password=password
+
+spring.jpa.properties.hibernate.format_sql=true
+spring.datasource.url= jdbc:sqlserver://localhost:1433;integratedSecurity=true;databaseName=job-application-manager-db
+
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.SQLServerDialect
+spring.jpa.hibernate.ddl-auto= create-drop
