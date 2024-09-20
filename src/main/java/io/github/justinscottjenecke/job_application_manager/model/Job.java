@@ -1,7 +1,13 @@
 package io.github.justinscottjenecke.job_application_manager.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
 public class Job {
-    // Job
     private Integer id;
     private String position;
     private String company;

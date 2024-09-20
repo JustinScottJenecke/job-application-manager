@@ -8,7 +8,6 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class JobApplication {
-    // Job
     private Integer id;
     private Integer jobId;
     private Integer applicationId;
