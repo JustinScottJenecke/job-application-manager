@@ -11,12 +11,13 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
+@Table(name = "application")
 public class Application {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "application")
     private Job job;
 
     private Double costToCompany; // could be moved to profile

@@ -6,10 +6,12 @@ spring:
     web-application-type: servlet
   datasource:
     url: jdbc:postgresql://localhost:5432/job-application-manager-db
-    username: admin
+    username: postgres
     password: admin
   jpa:
+    generate-ddl: true
     ddl-auto: create-drop
+    show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
