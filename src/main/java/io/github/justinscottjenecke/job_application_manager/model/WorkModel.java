@@ -1,7 +1,7 @@
 package io.github.justinscottjenecke.job_application_manager.model;
 
 public enum WorkModel {
-    Remote,
-    Office,
-    Hybrid
+    REMOTE,
+    OFFICE,
+    HYBRID
 }
