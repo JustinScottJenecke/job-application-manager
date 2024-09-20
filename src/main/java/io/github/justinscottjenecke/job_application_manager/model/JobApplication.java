@@ -8,15 +8,19 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 public class JobApplication {
+    // Job
     private Integer id;
     private String position;
     private String company;
     private String location;
-    private String workModel; // remote hybrid
+    private WorkModel workModel; // remote hybrid
     private Double offeredSalary;
-    private Double costToCompany;
-    private List<String> requiredSkills;
-    private String applicationStatus; // enum(not applied, applied, no response, interview, assessment, rejected, accepted)
+    private String requirements; // Incoming data will be list or array but will be persisted as comma separated string
+    // Application
+    private Double costToCompany; // could be moved to profile
+    private ApplicationStatus applicationStatus; // enum(not applied, applied, no response, interview, assessment, rejected, accepted)
+    private String applicationStatusNotes; // metadata on interview number, accepted an offer, etc.
     private String jobPostUrl;
     private Date dateApplied;
+    private Date dateFinalized;
 }
