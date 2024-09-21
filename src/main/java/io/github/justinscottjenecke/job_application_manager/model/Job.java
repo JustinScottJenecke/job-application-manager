@@ -12,7 +12,15 @@ import lombok.NoArgsConstructor;
 @Table(name = "job")
 public class Job {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name = "job_id_sequence",
+            sequenceName = "job_id_sequence"
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "job_id_sequence"
+    )
+
     private Integer id;
 
     @OneToOne(cascade = CascadeType.ALL)
