@@ -28,7 +28,10 @@ public class Application {
     private Job job;
 
     private Double costToCompany; // could be moved to profile
+
+    @Enumerated(value = EnumType.STRING)
     private ApplicationStatus applicationStatus; // enum(not applied, applied, no response, interview, assessment, rejected, accepted)
+
     private String applicationStatusNotes; // metadata on interview number, accepted an offer, etc.
     private Date dateApplied;
     private Date dateFinalized;

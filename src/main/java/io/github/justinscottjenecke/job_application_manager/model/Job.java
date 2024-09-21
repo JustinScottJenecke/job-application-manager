@@ -30,7 +30,11 @@ public class Job {
     private String position;
     private String company;
     private String location;
+
+    @Enumerated(value = EnumType.STRING)
     private WorkModel workModel; // remote hybrid
+
     private Double offeredSalary;
     private String requirements; // Incoming data will be list or array but will be persisted as comma separated string
+    private String jobPostingUrl;
 }
