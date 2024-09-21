@@ -35,6 +35,8 @@ public class Job {
     private WorkModel workModel; // remote hybrid
 
     private Double offeredSalary;
+
+    @Column(length = 2000)
     private String requirements; // Incoming data will be list or array but will be persisted as comma separated string
     private String jobPostingUrl;
 }

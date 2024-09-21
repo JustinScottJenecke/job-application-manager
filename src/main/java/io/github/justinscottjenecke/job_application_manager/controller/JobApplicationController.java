@@ -10,4 +10,6 @@ public class JobApplicationController {
     public String test() {
         return "test";
     }
+
+
 }
