@@ -76,7 +76,7 @@ public class ApplicationController {
             return new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));
     }
 
-    @DeleteMapping("{/id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) throws EmptyResultDataAccessException {
         try {
             applicationRepository.deleteById(id);
