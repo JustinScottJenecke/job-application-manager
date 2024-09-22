@@ -82,7 +82,7 @@ public class ApplicationController {
             applicationRepository.deleteById(id);
             return new ResponseEntity<>("Application deleted", HttpStatusCode.valueOf(200));
         } catch (EmptyResultDataAccessException exception) {
-            return new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));)
+            return new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));
         }
     }
 }
