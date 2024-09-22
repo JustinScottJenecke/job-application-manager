@@ -1,6 +1,6 @@
 --INSERT INTO job
 --    (
---        id,
+--        nextval('job_id_sequence'),
 --        company,
 --        job_posting_url,
 --        location,
@@ -12,7 +12,7 @@
 --    )
 --VALUES
 --     (
---        1,
+--        nextval('job_id_sequence'),
 --        'BETSoftware',
 --        'https://betsoftware.simplify.hr/Vacancy/95516',
 --        'Johannesburg, Gauteng',
