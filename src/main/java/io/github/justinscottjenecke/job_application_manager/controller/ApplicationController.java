@@ -6,11 +6,11 @@ import io.github.justinscottjenecke.job_application_manager.model.enumerations.A
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -73,6 +73,16 @@ public class ApplicationController {
             applicationRepository.save(application);
             return new ResponseEntity<>("Job application successfully updated", HttpStatusCode.valueOf(200));
         } else
-            return new ResponseEntity<>("No existing application found with given id" + id, HttpStatusCode.valueOf(404));
+            return new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));
+    }
+
+    @DeleteMapping("{/id}")
+    public ResponseEntity<String> delete(@PathVariable Integer id) throws EmptyResultDataAccessException {
+        try {
+            applicationRepository.deleteById(id);
+            return new ResponseEntity<>("Application deleted", HttpStatusCode.valueOf(200));
+        } catch (EmptyResultDataAccessException exception) {
+            return new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));)
+        }
     }
 }
