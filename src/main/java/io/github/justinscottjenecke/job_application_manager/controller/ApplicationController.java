@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.Path;
 import java.util.List;
 
 @RestController
@@ -52,5 +53,26 @@ public class ApplicationController {
         applicationRepository.save(application);
 
         return new ResponseEntity<>("New job applied for.", HttpStatusCode.valueOf(201));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@RequestBody Application applicationDto, @PathVariable Integer id) {
+
+        //Application x = applicationRepository.getReferenceById(id);
+
+        if(applicationRepository.existsById(id)) {
+            Application application = new Application();
+
+            application.setId(id);
+            application.setApplicationStatus(applicationDto.getApplicationStatus());
+            application.setApplicationStatusNotes(applicationDto.getApplicationStatusNotes());
+            application.setCostToCompany(applicationDto.getCostToCompany());
+            application.setDateApplied(applicationDto.getDateApplied());
+            application.setDateFinalized(applicationDto.getDateFinalized());
+
+            applicationRepository.save(application);
+            return new ResponseEntity<>("Job application successfully updated", HttpStatusCode.valueOf(200));
+        } else
+            return new ResponseEntity<>("No existing application found with given id" + id, HttpStatusCode.valueOf(404));
     }
 }
