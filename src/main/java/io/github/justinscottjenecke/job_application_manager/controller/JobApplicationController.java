@@ -1,13 +1,10 @@
 package io.github.justinscottjenecke.job_application_manager.controller;
 
 import io.github.justinscottjenecke.job_application_manager.model.Job;
-import io.github.justinscottjenecke.job_application_manager.model.WorkModel;
+import io.github.justinscottjenecke.job_application_manager.model.enumerations.WorkModel;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class JobApplicationController {

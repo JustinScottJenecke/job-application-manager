@@ -1,5 +1,6 @@
 package io.github.justinscottjenecke.job_application_manager.model;
 
+import io.github.justinscottjenecke.job_application_manager.model.enumerations.WorkModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

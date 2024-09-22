@@ -1,4 +1,4 @@
-package io.github.justinscottjenecke.job_application_manager.model;
+package io.github.justinscottjenecke.job_application_manager.model.enumerations;
 
 public enum ApplicationStatus {
     APPLIED,

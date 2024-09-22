@@ -1,6 +1,6 @@
-package io.github.justinscottjenecke.job_application_manager.model;
+package io.github.justinscottjenecke.job_application_manager.dto.job;
 
-public record CreateJobDTO(
+public record CreateJobDto(
         String position,
         String company,
         String location,

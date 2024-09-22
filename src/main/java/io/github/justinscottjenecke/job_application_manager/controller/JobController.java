@@ -1,8 +1,8 @@
 package io.github.justinscottjenecke.job_application_manager.controller;
 
-import io.github.justinscottjenecke.job_application_manager.model.CreateJobDTO;
+import io.github.justinscottjenecke.job_application_manager.dto.job.CreateJobDto;
 import io.github.justinscottjenecke.job_application_manager.model.Job;
-import io.github.justinscottjenecke.job_application_manager.model.WorkModel;
+import io.github.justinscottjenecke.job_application_manager.model.enumerations.WorkModel;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -26,7 +26,7 @@ public class JobController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> create(@RequestBody CreateJobDTO jobDto) {
+    public ResponseEntity<String> create(@RequestBody CreateJobDto jobDto) {
         Job job = new Job();
 
         job.setPosition(jobDto.position());
