@@ -5,6 +5,7 @@ import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.model.enumerations.ApplicationStatus;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,6 +34,11 @@ public class ApplicationController {
         return applicationRepository.findAll();
     }
 
+    @GetMapping("/{id}")
+    public Application readById(@PathVariable Integer id) {
+        return applicationRepository.findById(id).orElseThrow( () -> new EntityNotFoundException("No application found with given id" + id) );
+    }
+
     @PostMapping
     public ResponseEntity<String> create(@RequestBody CreateApplicationDto applicationDto) {
         Application application = new Application();
@@ -47,5 +53,4 @@ public class ApplicationController {
 
         return new ResponseEntity<>("New job applied for.", HttpStatusCode.valueOf(201));
     }
-
 }
