@@ -35,5 +35,6 @@ public class Application {
 
     private String applicationStatusNotes; // metadata on interview number, accepted an offer, etc.
     private Date dateApplied;
+    private Date latestStatusUpdate;
     private Date dateFinalized;
 }

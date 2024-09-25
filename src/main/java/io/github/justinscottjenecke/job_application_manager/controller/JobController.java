@@ -33,8 +33,8 @@ public class JobController {
         job.setCompany(jobDto.company());
         job.setJobPostingUrl(jobDto.jobPostingUrl());
         job.setLocation(jobDto.location());
-        job.setRequirements(jobDto.requirements());
-        job.setOfferedSalary(jobDto.offeredSalary());
+        job.setRequiredSkillsAndTools(jobDto.requirements());
+        job.setPostedSalary(jobDto.offeredSalary());
         job.setWorkModel( WorkModel.valueOf( jobDto.workModel()) );
 
         jobRepository.save(job);
