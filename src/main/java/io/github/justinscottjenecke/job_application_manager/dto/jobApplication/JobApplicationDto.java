@@ -11,7 +11,7 @@ package io.github.justinscottjenecke.job_application_manager.dto.jobApplication;
  * @param location
  * @param applicationStatus
  */
-public record JobApplicationDescriptionDto(
+public record JobApplicationDto(
         Integer applicationId,
         Integer jobId,
         String company,
