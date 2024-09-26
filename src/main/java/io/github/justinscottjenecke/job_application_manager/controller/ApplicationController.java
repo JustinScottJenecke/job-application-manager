@@ -5,7 +5,9 @@ import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.model.enumerations.ApplicationStatus;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
+import io.github.justinscottjenecke.job_application_manager.service.ApplicationService;
 import jakarta.persistence.EntityNotFoundException;
+import org.apache.catalina.mapper.Mapper;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -19,10 +21,16 @@ public class ApplicationController {
 
     private final IApplicationRepository applicationRepository;
     private  final IJobRepository jobRepository;
+    private final ApplicationService applicationService;
 
-    public ApplicationController(IApplicationRepository applicationRepository, IJobRepository jobRepository) {
+    public ApplicationController(
+            IApplicationRepository applicationRepository,
+            IJobRepository jobRepository,
+            ApplicationService applicationService
+    ) {
         this.applicationRepository = applicationRepository;
         this.jobRepository = jobRepository;
+        this.applicationService = applicationService;
     }
 
     @GetMapping("/test")
