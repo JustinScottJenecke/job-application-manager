@@ -8,6 +8,7 @@ public record ApplicationDetailsDto(
         String applicationStatus,
         String applicationStatusNotes,
         Date dateApplied,
+        Date latestStatusUpdate,
         Date dateFinalized,
         String company) {
 }
