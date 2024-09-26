@@ -5,7 +5,8 @@ public record CreateJobDto(
         String company,
         String location,
         String workModel,
-        Double offeredSalary,
-        String requirements,
+        Double postedSalary,
+        String coreSkill,
+        String requiredSkillsAndTools,
         String jobPostingUrl) {
 }
