@@ -1,22 +1,33 @@
 package io.github.justinscottjenecke.job_application_manager.dto.jobApplication;
 
+import io.github.justinscottjenecke.job_application_manager.model.Application;
+import io.github.justinscottjenecke.job_application_manager.model.Job;
+
 /**
- * DTO for returning a summary of a job application with enough relevant information.
- * Information provided by dto is to be used a preview, in a button, or in a list.
+ * A wrapper DTO containing an application entity as well as its associated job entity,
+ * which is used to perform most sorting and filtering business logic on the client-side.
  *
- * @param applicationId id field of associated application model entity
- * @param jobId id field of associated job model entity
- * @param company
- * @param position
- * @param location
- * @param applicationStatus
+ * @param job
+ * @param application
  */
 public record JobApplicationDto(
-        Integer applicationId,
-        Integer jobId,
-        String company,
-        String position,
-        String location,
-        String applicationStatus) {
-
+        Job job,
+        Application application
+        // job
+//        Integer jobId,
+//        String position,
+//        String company,
+//        String location,
+//        String workModel,
+//        Double postedSalary,
+//        String coreSkill,
+        // application
+//        Integer applicationId,
+//        Double costToCompany,
+//        String applicationStatus,
+//        String applicationStatusNotes,
+//        Date dateApplied,
+//        Date latestStatusUpdate,
+//        Date dateFinalized
+          ) {
 }
