@@ -3,6 +3,7 @@ package io.github.justinscottjenecke.job_application_manager.service;
 import io.github.justinscottjenecke.job_application_manager.App;
 import io.github.justinscottjenecke.job_application_manager.dto.application.ApplicationDetailsDto;
 import io.github.justinscottjenecke.job_application_manager.dto.application.CreateApplicationDto;
+import io.github.justinscottjenecke.job_application_manager.dto.application.UpdateApplicationDto;
 import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.model.enumerations.ApplicationStatus;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
@@ -32,13 +33,20 @@ public class ApplicationService {
      * @param dto ApplicationDetailsDto
      * @return Application
      */
-    public static Application applicationDetailsToApplication(ApplicationDetailsDto dto) {
+    public Application applicationDetailsToModel(UpdateApplicationDto dto) {
 
         var application = new Application();
 
-        application.set
+        application.setId(dto.id());
+        application.setJob( jobRepository.getReferenceById( dto.jobId() ));
+        application.setCostToCompany(dto.costToCompany());
+        application.setApplicationStatus( ApplicationStatus.valueOf(dto.applicationStatus()) );
+        application.setApplicationStatusNotes(dto.applicationStatusNotes());
+        application.setDateApplied(dto.dateApplied());
+        application.setLatestStatusUpdate(dto.latestStatusUpdate());
+        application.setDateFinalized(dto.dateFinalized());
 
-        return null;
+        return application;
     }
 
     /**
@@ -47,7 +55,7 @@ public class ApplicationService {
      * @param dto CreateApplicationDto
      * @return Application
      */
-    public Application createApplicationToApplication(CreateApplicationDto dto) {
+    public Application createApplicationToModel(CreateApplicationDto dto) {
 
         var application = new Application();
 
@@ -66,7 +74,7 @@ public class ApplicationService {
      * @param application Application
      * @return ApplicationDetailsDto
      */
-    public ApplicationDetailsDto applicationToApplicationDetails(Application application) {
+    public UpdateApplicationDto modelToApplicationDetails(Application application) {
         return null;
     }
 
@@ -75,7 +83,7 @@ public class ApplicationService {
      * @param application Application
      * @return CreateApplicationDto
      */
-    public CreateApplicationDto applicationToCreateApplication(Application application) {
+    public CreateApplicationDto modelToCreateApplication(Application application) {
         return null;
     }
 }
