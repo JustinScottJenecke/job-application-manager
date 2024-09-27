@@ -20,17 +20,11 @@ import java.util.List;
 @RequestMapping("/api/v1/application")
 public class ApplicationController {
 
-    // private final IApplicationRepository applicationRepository;
-    // private  final IJobRepository jobRepository;
     private final ApplicationService applicationService;
 
     public ApplicationController(
-            // IApplicationRepository applicationRepository,
-            // IJobRepository jobRepository,
             ApplicationService applicationService
     ) {
-        // this.applicationRepository = applicationRepository;
-        // this.jobRepository = jobRepository;
         this.applicationService = applicationService;
     }
 
