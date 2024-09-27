@@ -7,6 +7,7 @@ import io.github.justinscottjenecke.job_application_manager.model.enumerations.A
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -33,22 +34,33 @@ public class ApplicationService {
         applicationRepository.save( createApplicationToModel(dto) );
     }
 
-    public Optional<Application> read(int id) {
-        return applicationRepository.findById(id);
+    public Application read(int id) {
+        return applicationRepository.findById(id).orElseThrow( () -> new EntityNotFoundException("No application found with given id" + id) );
     }
 
     public List<Application> readAll() {
         return  applicationRepository.findAll();
     }
 
-    public void update(UpdateApplicationDto dto, Integer id) {
+    public boolean update(UpdateApplicationDto dto, Integer id) {
         if (applicationRepository.existsById(id)) {
             applicationRepository.save( updateApplicationToModel(dto) );
+            return true;
         }
+
+        return false;
     }
 
-    public void delete(Integer id) {
+    public boolean delete(Integer id) {
+
+        // entity does not exist
+        if (!applicationRepository.existsById(id)) {
+            return false;
+        }
         applicationRepository.deleteById(id);
+
+        // return true if id does not exist
+        return !applicationRepository.existsById(id);
     }
 
     /* Mapper Methods */

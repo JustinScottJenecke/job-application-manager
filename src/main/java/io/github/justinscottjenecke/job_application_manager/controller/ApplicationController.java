@@ -1,6 +1,7 @@
 package io.github.justinscottjenecke.job_application_manager.controller;
 
 import io.github.justinscottjenecke.job_application_manager.dto.application.CreateApplicationDto;
+import io.github.justinscottjenecke.job_application_manager.dto.application.UpdateApplicationDto;
 import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.model.enumerations.ApplicationStatus;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
@@ -19,17 +20,17 @@ import java.util.List;
 @RequestMapping("/api/v1/application")
 public class ApplicationController {
 
-    private final IApplicationRepository applicationRepository;
-    private  final IJobRepository jobRepository;
+    // private final IApplicationRepository applicationRepository;
+    // private  final IJobRepository jobRepository;
     private final ApplicationService applicationService;
 
     public ApplicationController(
-            IApplicationRepository applicationRepository,
-            IJobRepository jobRepository,
+            // IApplicationRepository applicationRepository,
+            // IJobRepository jobRepository,
             ApplicationService applicationService
     ) {
-        this.applicationRepository = applicationRepository;
-        this.jobRepository = jobRepository;
+        // this.applicationRepository = applicationRepository;
+        // this.jobRepository = jobRepository;
         this.applicationService = applicationService;
     }
 
@@ -40,39 +41,28 @@ public class ApplicationController {
 
     @GetMapping
     public List<Application> readAll() {
-        return applicationRepository.findAll();
+        return applicationService.readAll();
     }
 
     @GetMapping("/{id}")
     public Application readById(@PathVariable Integer id) {
-        return applicationRepository.findById(id).orElseThrow( () -> new EntityNotFoundException("No application found with given id" + id) );
+        return applicationService.read(id);
     }
 
     @PostMapping
     public ResponseEntity<String> create(@RequestBody CreateApplicationDto applicationDto) {
-        Application application = new Application();
 
-        applicationRepository.save(application);
+        applicationService.create(applicationDto);
 
         return new ResponseEntity<>("New job applied for.", HttpStatusCode.valueOf(201));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> update(@RequestBody Application applicationDto, @PathVariable Integer id) {
+    public ResponseEntity<String> update(@RequestBody UpdateApplicationDto applicationDto, @PathVariable Integer id) {
 
         //Application x = applicationRepository.getReferenceById(id);
 
-        if(applicationRepository.existsById(id)) {
-            Application application = new Application();
-
-            application.setId(id);
-            application.setApplicationStatus(applicationDto.getApplicationStatus());
-            application.setApplicationStatusNotes(applicationDto.getApplicationStatusNotes());
-            application.setCostToCompany(applicationDto.getCostToCompany());
-            application.setDateApplied(applicationDto.getDateApplied());
-            application.setDateFinalized(applicationDto.getDateFinalized());
-
-            applicationRepository.save(application);
+        if(applicationService.update(applicationDto, id)) {
             return new ResponseEntity<>("Job application successfully updated", HttpStatusCode.valueOf(200));
         } else
             return new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));
@@ -80,10 +70,12 @@ public class ApplicationController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) throws EmptyResultDataAccessException {
-        try {
-            applicationRepository.deleteById(id);
+
+        var result = applicationService.delete(id);
+
+        if (result) {
             return new ResponseEntity<>("Application deleted", HttpStatusCode.valueOf(200));
-        } catch (EmptyResultDataAccessException exception) {
+        } else {
             return new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));
         }
     }
