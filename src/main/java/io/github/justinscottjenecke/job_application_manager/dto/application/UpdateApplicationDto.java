@@ -13,15 +13,14 @@ import java.util.Date;
  * @param dateApplied
  * @param latestStatusUpdate Timestamp created when an application's status is changed
  * @param dateFinalized
- * @param company
  */
-public record ApplicationDetailsDto(
+public record UpdateApplicationDto(
+        Integer id,
         Integer jobId,
         Double costToCompany,
         String applicationStatus,
         String applicationStatusNotes,
         Date dateApplied,
         Date latestStatusUpdate,
-        Date dateFinalized,
-        String company) {
+        Date dateFinalized) {
 }

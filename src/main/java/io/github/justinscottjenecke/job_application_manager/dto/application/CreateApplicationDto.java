@@ -9,11 +9,9 @@ import java.util.Date;
  * @param jobId References the existing job within the system
  * @param costToCompany
  * @param applicationStatusNotes Any additional notes the user wants to add to their application
- * @param dateApplied
  */
 public record CreateApplicationDto(
         Integer jobId,
         Double costToCompany,
-        String applicationStatusNotes,
-        Date dateApplied) {
+        String applicationStatusNotes) {
 }

@@ -7,7 +7,7 @@ import io.github.justinscottjenecke.job_application_manager.repository.IApplicat
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 import io.github.justinscottjenecke.job_application_manager.service.ApplicationService;
 import jakarta.persistence.EntityNotFoundException;
-import org.apache.catalina.mapper.Mapper;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -51,12 +51,6 @@ public class ApplicationController {
     @PostMapping
     public ResponseEntity<String> create(@RequestBody CreateApplicationDto applicationDto) {
         Application application = new Application();
-
-        application.setJob(jobRepository.getReferenceById( applicationDto.jobId() ));
-        application.setApplicationStatus( ApplicationStatus.valueOf(applicationDto.applicationStatus()) );
-        application.setApplicationStatusNotes(applicationDto.applicationStatusNotes());
-        application.setDateApplied(applicationDto.dateApplied());
-        application.setCostToCompany(applicationDto.costToCompany());
 
         applicationRepository.save(application);
 

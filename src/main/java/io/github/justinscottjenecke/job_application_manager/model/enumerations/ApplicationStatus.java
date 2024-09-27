@@ -6,5 +6,5 @@ public enum ApplicationStatus {
     INTERVIEW,
     WAITING_PERIOD,
     UNSUCCESSFUL,
-    SUCCESSFUL
+    SUCCESSFUL;
 }
