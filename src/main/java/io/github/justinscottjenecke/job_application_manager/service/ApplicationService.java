@@ -1,17 +1,17 @@
 package io.github.justinscottjenecke.job_application_manager.service;
 
-import io.github.justinscottjenecke.job_application_manager.App;
-import io.github.justinscottjenecke.job_application_manager.dto.application.ApplicationDetailsDto;
 import io.github.justinscottjenecke.job_application_manager.dto.application.CreateApplicationDto;
 import io.github.justinscottjenecke.job_application_manager.dto.application.UpdateApplicationDto;
 import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.model.enumerations.ApplicationStatus;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
-import io.github.justinscottjenecke.job_application_manager.service.mappers.ApplicationMapper;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ApplicationService {
@@ -27,13 +27,38 @@ public class ApplicationService {
         this.jobRepository = jobRepository;
     }
 
+    /* CRUD Methods */
+
+    public void create(CreateApplicationDto dto) {
+        applicationRepository.save( createApplicationToModel(dto) );
+    }
+
+    public Optional<Application> read(int id) {
+        return applicationRepository.findById(id);
+    }
+
+    public List<Application> readAll() {
+        return  applicationRepository.findAll();
+    }
+
+    public void update(UpdateApplicationDto dto, Integer id) {
+        if (applicationRepository.existsById(id)) {
+            applicationRepository.save( updateApplicationToModel(dto) );
+        }
+    }
+
+    public void delete(Integer id) {
+        applicationRepository.deleteById(id);
+    }
+
+    /* Mapper Methods */
     /**
      * Used to update and existing Application.
      * Maps the properties of an ApplicationDetailsDto to an Application Entity.
      * @param dto ApplicationDetailsDto
      * @return Application
      */
-    public Application applicationDetailsToModel(UpdateApplicationDto dto) {
+    public Application updateApplicationToModel(UpdateApplicationDto dto) {
 
         var application = new Application();
 
