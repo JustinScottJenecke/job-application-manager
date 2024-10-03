@@ -40,29 +40,26 @@ public class ApplicationController {
 
     @PostMapping
     public ResponseEntity<String> create(@RequestBody CreateApplicationDto applicationDto) {
-
-        applicationService.create(applicationDto);
-
-        return new ResponseEntity<>("New job applied for.", HttpStatusCode.valueOf(201));
+        return applicationService.create(applicationDto) ?
+            new ResponseEntity<>("New job applied for.", HttpStatusCode.valueOf(201))
+            :
+            new ResponseEntity<>("Error creating new job", HttpStatusCode.valueOf(500));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> update(@RequestBody UpdateApplicationDto applicationDto, @PathVariable Integer id) {
-        if(applicationService.update(applicationDto, id))
-            return new ResponseEntity<>("Job application successfully updated", HttpStatusCode.valueOf(200));
-        else
-            return new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));
+        return applicationService.update(applicationDto, id) ?
+            new ResponseEntity<>("Job application successfully updated", HttpStatusCode.valueOf(200))
+            :
+            new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Integer id) throws EmptyResultDataAccessException {
-
-        var successfulDelete = applicationService.delete(id);
-
-        if (successfulDelete) {
-            return new ResponseEntity<>("Application deleted", HttpStatusCode.valueOf(200));
-        } else {
-            return new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));
-        }
+        // var successfulDelete = applicationService.delete(id);
+        return applicationService.delete(id) ?
+            new ResponseEntity<>("Application deleted", HttpStatusCode.valueOf(200))
+            :
+            new ResponseEntity<>("No existing application found with given id: " + id, HttpStatusCode.valueOf(404));
     }
 }
