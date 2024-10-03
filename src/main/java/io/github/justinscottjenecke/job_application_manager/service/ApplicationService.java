@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ApplicationService {
@@ -28,49 +27,84 @@ public class ApplicationService {
         this.jobRepository = jobRepository;
     }
 
-    /* CRUD Methods */
+    /* ========== CRUD Methods ========== */
 
-    public void create(CreateApplicationDto dto) {
-        applicationRepository.save( createApplicationToModel(dto) );
+    /**
+     * Accepts a DTO as an argument, maps the DTO to an Application model, and persists the Model to the
+     * database. Returns a boolean value if the model has been successfully persisted.
+     * @param dto CreateApplicationDto
+     * @return Boolean
+     */
+    public boolean create(CreateApplicationDto dto) {
+        return applicationRepository.existsById(applicationRepository.save( mapCreateApplicationToModel(dto) )
+                .getId());
     }
 
+    /**
+     * Reads an existing job application entity by id. Throws an EntityNotFoundException exception if a Model does not exist
+     * for the id given/provided.
+     * @param id Integer - id of an existing job application
+     * @return Optional<Application>
+     */
     public Application read(int id) {
-        return applicationRepository.findById(id).orElseThrow( () -> new EntityNotFoundException("No application found with given id" + id) );
+        return applicationRepository.findById(id)
+                .orElseThrow( () -> new EntityNotFoundException("No application found with given id" + id) );
     }
 
+    /**
+     * Retrieves a list of all job applications persisted in the application's database
+     * @return List<Application>
+     */
     public List<Application> readAll() {
-        return  applicationRepository.findAll();
+        return applicationRepository.findAll();
     }
 
+    /**
+     * Used to update an existing job application. Accepts an UpdateApplicationDto and maps it to an
+     * Application model, before updating the values of the existing Application entity, in the case that
+     * the id provided/given matches the id of an entity in the database
+     * @param dto UpdateApplicationDto
+     * @param id Integer
+     * @return Boolean - true for successful update, false for unsuccessful
+     */
     public boolean update(UpdateApplicationDto dto, Integer id) {
         if (applicationRepository.existsById(id)) {
-            applicationRepository.save( updateApplicationToModel(dto) );
+            applicationRepository.save( mapUpdateApplicationToModel(dto) );
             return true;
         }
 
         return false;
     }
 
+    /**
+     * Deletes and Application entity by id. Returns true if entity to be deleted does exist and is deleted successfully,
+     * otherwise method returns false if the give/provided id does not match any existing Application entity, or if the delete
+     * fails for some reason (and the entity still persists in the database)
+     * @param id Integer
+     * @return boolean - true if delete is successful, false if something went wrong
+     */
     public boolean delete(Integer id) {
 
-        // entity does not exist
+        // entity does not exist return false to exit method
         if (!applicationRepository.existsById(id)) {
             return false;
         }
+
+        // delete entity
         applicationRepository.deleteById(id);
 
         // return true if id does not exist
         return !applicationRepository.existsById(id);
     }
 
-    /* Mapper Methods */
+    /* ========== Mapper Methods ========== */
     /**
      * Used to update and existing Application.
      * Maps the properties of an ApplicationDetailsDto to an Application Entity.
      * @param dto ApplicationDetailsDto
      * @return Application
      */
-    public Application updateApplicationToModel(UpdateApplicationDto dto) {
+    public Application mapUpdateApplicationToModel(UpdateApplicationDto dto) {
 
         var application = new Application();
 
@@ -92,7 +126,7 @@ public class ApplicationService {
      * @param dto CreateApplicationDto
      * @return Application
      */
-    public Application createApplicationToModel(CreateApplicationDto dto) {
+    public Application mapCreateApplicationToModel(CreateApplicationDto dto) {
 
         var application = new Application();
 
@@ -111,7 +145,7 @@ public class ApplicationService {
      * @param application Application
      * @return ApplicationDetailsDto
      */
-    public UpdateApplicationDto modelToApplicationDetails(Application application) {
+    public UpdateApplicationDto mapModelToApplicationDetails(Application application) {
         return null;
     }
 
@@ -120,7 +154,7 @@ public class ApplicationService {
      * @param application Application
      * @return CreateApplicationDto
      */
-    public CreateApplicationDto modelToCreateApplication(Application application) {
+    public CreateApplicationDto mapModelToCreateApplication(Application application) {
         return null;
     }
 }
