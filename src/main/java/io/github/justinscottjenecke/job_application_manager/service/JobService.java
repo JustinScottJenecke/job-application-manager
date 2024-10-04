@@ -78,8 +78,20 @@ public class JobService {
         return job;
     }
 
-    public void mapCreateJobToModel(CreateJobDto dto) {
+    public Job mapCreateJobToModel(CreateJobDto dto) {
 
+        var job = new Job();
+
+        job.setPosition(dto.position());
+        job.setCompany(dto.company());
+        job.setLocation(dto.location());
+        job.setWorkModel( WorkModel.valueOf(dto.workModel()) );
+        job.setPostedSalary(dto.postedSalary());
+        job.setCoreSkill(dto.coreSkill());
+        job.setRequiredSkillsAndTools(dto.requiredSkillsAndTools());
+        job.setJobPostingUrl(dto.jobPostingUrl());
+
+        return job;
     }
 
     public void mapModelToJobDetails(Job job) {
