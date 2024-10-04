@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -94,8 +95,39 @@ public class JobService {
         return job;
     }
 
-    public void mapModelToJobDetails(Job job) {
+    public JobDetailsDto mapModelToJobDetails(Job job) {
 
+        if(job.getApplication() != null) {
+            return new JobDetailsDto(
+                    job.getId(),
+                    job.getPosition(),
+                    job.getCompany(),
+                    job.getLocation(),
+                    job.getWorkModel().toString(),
+                    job.getPostedSalary(),
+                    job.getCoreSkill(),
+                    job.getRequiredSkillsAndTools(),
+                    job.getJobPostingUrl(),
+                    null,
+                    true,
+                    job.getApplication().getId()
+            );
+        } else {
+            return new JobDetailsDto(
+                    job.getId(),
+                    job.getPosition(),
+                    job.getCompany(),
+                    job.getLocation(),
+                    job.getWorkModel().toString(),
+                    job.getPostedSalary(),
+                    job.getCoreSkill(),
+                    job.getRequiredSkillsAndTools(),
+                    job.getJobPostingUrl(),
+                    null,
+                    false,
+                    null
+            );
+        }
     }
 
 }
