@@ -3,7 +3,7 @@ package io.github.justinscottjenecke.job_application_manager.dto.job;
 /**
  * Used when displaying in a list of all jobs to Update/manage the jobs in the system
  *
- * @param Id
+ * @param id
  * @param position
  * @param company
  * @param location
@@ -15,15 +15,17 @@ package io.github.justinscottjenecke.job_application_manager.dto.job;
  * @param onGoingApplication boolean value that is derived from the applicationStatus field of an associated application
  */
 public record JobDetailsDto(
-        Integer Id,
+        Integer id,
         String position,
         String company,
         String location,
         String workModel,
         Double postedSalary,
+        String coreSkill,
         String requiredSkillsAndTools,
         String jobPostingUrl,
         Boolean previouslyApplied, // derived: applicationStatus
-        Boolean onGoingApplication // derived: applicationStatus
+        Boolean onGoingApplication, // derived: applicationStatus
+        Integer applicationId
         ) {
 }
