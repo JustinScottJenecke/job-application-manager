@@ -2,19 +2,15 @@ package io.github.justinscottjenecke.job_application_manager.service;
 
 import io.github.justinscottjenecke.job_application_manager.dto.job.CreateJobDto;
 import io.github.justinscottjenecke.job_application_manager.dto.job.JobDetailsDto;
-import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.model.Job;
 import io.github.justinscottjenecke.job_application_manager.model.enumerations.WorkModel;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 import jakarta.persistence.EntityNotFoundException;
-import org.hibernate.annotations.NotFound;
+
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class JobService {
