@@ -7,6 +7,7 @@ import io.github.justinscottjenecke.job_application_manager.model.Job;
 import io.github.justinscottjenecke.job_application_manager.model.enumerations.WorkModel;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
+import jakarta.persistence.EntityNotFoundException;
 import org.hibernate.annotations.NotFound;
 import org.springframework.stereotype.Service;
 
@@ -27,28 +28,40 @@ public class JobService {
     }
 
     public boolean create(CreateJobDto dto) {
-        return false;
+
+        var job = jobRepository.save( mapCreateJobToModel(dto) );
+
+        return jobRepository.existsById(job.getId());
     }
 
     public Job readById(Integer id) {
-        return new Job();
+
+        return jobRepository.findById(id)
+                .orElseThrow( () -> new EntityNotFoundException("No Job entity found with given id: " + id));
     }
 
     public List<Job> readAll() {
-        return List.of();
+        return jobRepository.findAll();
     }
 
     public boolean updateById(JobDetailsDto dto, Integer id) {
 
-        // check if id of job exists
-        // check if has application
-        // check if application is valid
-
+        // check if id of job exists - check if has application - check if application is valid
+        if (jobRepository.existsById(id)) {
+            jobRepository.save(  mapJobDetailsToModel(dto) );
+            return true;
+        }
         return false;
     }
 
     public boolean deleteById(Integer id) {
-        return false;
+
+        if (!jobRepository.existsById(id))
+            return false;
+
+        jobRepository.deleteById(id);
+
+        return !jobRepository.existsById(id);
     }
 
     // DTO Mapper functions
