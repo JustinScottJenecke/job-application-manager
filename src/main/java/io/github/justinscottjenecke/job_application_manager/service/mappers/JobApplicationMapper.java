@@ -1,8 +1,12 @@
 package io.github.justinscottjenecke.job_application_manager.service.mappers;
 
+import io.github.justinscottjenecke.job_application_manager.dto.jobApplication.CreateJobApplicationDto;
 import io.github.justinscottjenecke.job_application_manager.dto.jobApplication.JobApplicationDto;
+import io.github.justinscottjenecke.job_application_manager.dto.jobApplication.JobApplicationWrapper;
 import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.model.Job;
+import io.github.justinscottjenecke.job_application_manager.model.enumerations.ApplicationStatus;
+import io.github.justinscottjenecke.job_application_manager.model.enumerations.WorkModel;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 import org.springframework.stereotype.Component;
@@ -18,12 +22,25 @@ public class JobApplicationMapper {
         this.applicationRepository = applicationRepository;
     }
 
-    public boolean mapCreateJobApplicationToModels(JobApplicationDto dto) {
+    public JobApplicationWrapper mapCreateJobApplicationToModels(CreateJobApplicationDto dto) {
 
         var job = new Job();
-        var application = new Application();
+        job.setPosition( dto.position() );
+        job.setCompany(dto.company() );
+        job.setLocation( dto.location() );
+        job.setWorkModel( WorkModel.valueOf(dto.workModel()) );
+        job.setPostedSalary( dto.postedSalary() );
+        job.setCoreSkill( dto.coreSkill() );
+        job.setRequiredSkillsAndTools( dto.requiredSkillsAndTools() );
+        job.setJobPostingUrl( dto.jobPostingUrl() );
 
-        return false;
+        var application = new Application();
+        application.setCostToCompany( dto.costToCompany() );
+        application.setApplicationStatus( ApplicationStatus.APPLIED );
+        application.setApplicationStatusNotes( dto.applicationStatusNotes() );
+        application.setDateApplied( dto.dateApplied() );
+
+        return new JobApplicationWrapper(job, application);
     }
 
     public JobApplicationDto mapModelsToJobApplication(Job job, Application application) {
