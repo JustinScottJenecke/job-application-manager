@@ -22,7 +22,7 @@ public class JobApplicationMapper {
         this.applicationRepository = applicationRepository;
     }
 
-    public JobApplicationWrapper mapCreateJobApplicationToModels(CreateJobApplicationDto dto) {
+    public JobApplicationDto mapCreateJobApplicationToModels(CreateJobApplicationDto dto) {
 
         var job = new Job();
         job.setPosition( dto.position() );
@@ -40,10 +40,14 @@ public class JobApplicationMapper {
         application.setApplicationStatusNotes( dto.applicationStatusNotes() );
         application.setDateApplied( dto.dateApplied() );
 
-        return new JobApplicationWrapper(job, application);
+        // associate entities
+        job.setApplication(application);
+        application.setJob(job);
+
+        return new JobApplicationDto(job, application);
     }
 
     public JobApplicationDto mapModelsToJobApplication(Job job, Application application) {
-        return new JobApplicationDto(null, null);
+        return new JobApplicationDto(job, application);
     }
 }
