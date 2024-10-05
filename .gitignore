@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### temp files ###
+docs/~$cumentation-Job-Application-Manager.docx

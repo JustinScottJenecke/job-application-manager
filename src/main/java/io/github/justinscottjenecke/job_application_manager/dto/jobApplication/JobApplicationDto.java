@@ -21,6 +21,8 @@ public record JobApplicationDto(
 //        String workModel,
 //        Double postedSalary,
 //        String coreSkill,
+//        String requiredSkillsAndTools
+//        String jobPostingUrl
         // application
 //        Integer applicationId,
 //        Double costToCompany,
