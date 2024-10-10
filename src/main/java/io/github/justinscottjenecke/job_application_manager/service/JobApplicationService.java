@@ -6,10 +6,12 @@ import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 import io.github.justinscottjenecke.job_application_manager.service.mappers.JobApplicationMapper;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class JobApplicationService {
 
     private final IJobRepository jobRepository;
