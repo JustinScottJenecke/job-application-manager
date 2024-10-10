@@ -31,7 +31,12 @@ public class JobApplicationService {
         var job = jobRepository.save(jobApplicationDto.job());
         var application = applicationRepository.save(jobApplicationDto.application());
 
+
         return jobRepository.existsById(job.getId()) || applicationRepository.existsById(application.getId());
+    }
+
+    public List<JobApplicationDto> readAll() {
+        return null;
     }
 
 }
