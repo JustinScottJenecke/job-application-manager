@@ -23,11 +23,6 @@ public class ApplicationController {
         this.applicationService = applicationService;
     }
 
-    @GetMapping("/test")
-    public String test() {
-        return "application controller test endpoint";
-    }
-
     @GetMapping
     public List<Application> readAll() {
         return applicationService.readAll();

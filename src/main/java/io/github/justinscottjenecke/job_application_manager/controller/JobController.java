@@ -3,7 +3,6 @@ package io.github.justinscottjenecke.job_application_manager.controller;
 import io.github.justinscottjenecke.job_application_manager.dto.job.CreateJobDto;
 import io.github.justinscottjenecke.job_application_manager.dto.job.JobDetailsDto;
 import io.github.justinscottjenecke.job_application_manager.model.Job;
-import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 import io.github.justinscottjenecke.job_application_manager.service.JobService;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
