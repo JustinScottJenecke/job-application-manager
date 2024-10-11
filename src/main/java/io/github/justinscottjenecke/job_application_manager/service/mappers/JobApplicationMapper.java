@@ -2,7 +2,6 @@ package io.github.justinscottjenecke.job_application_manager.service.mappers;
 
 import io.github.justinscottjenecke.job_application_manager.dto.jobApplication.CreateJobApplicationDto;
 import io.github.justinscottjenecke.job_application_manager.dto.jobApplication.JobApplicationDto;
-import io.github.justinscottjenecke.job_application_manager.dto.jobApplication.JobApplicationWrapper;
 import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.model.Job;
 import io.github.justinscottjenecke.job_application_manager.model.enumerations.ApplicationStatus;
