@@ -25,7 +25,7 @@ public class Application {
     )
     private Integer id;
 
-    @OneToOne(mappedBy = "application")
+    @OneToOne(mappedBy = "application", fetch = FetchType.LAZY)
     private Job job;
 
     private Double costToCompany; // could be moved to profile
