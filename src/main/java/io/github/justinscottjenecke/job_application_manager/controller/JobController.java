@@ -23,12 +23,10 @@ public class JobController {
     @PostMapping()
     public ResponseEntity<String> create(@RequestBody CreateJobDto jobDto) {
 
-        jobService.create(jobDto);
-
-        return new ResponseEntity<>(
-                "Created new Job: " + jobDto.position() + " at " + jobDto.company(),
-                HttpStatusCode.valueOf(201)
-        );
+        return jobService.create(jobDto) ?
+                new ResponseEntity<>("Created new Job: " + jobDto.position() + " at " + jobDto.company(), HttpStatusCode.valueOf(201))
+                :
+                new ResponseEntity<>("Error creating", HttpStatusCode.valueOf(500));
     }
 
     @GetMapping()
