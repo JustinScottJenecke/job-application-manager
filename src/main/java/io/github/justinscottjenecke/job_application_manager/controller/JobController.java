@@ -1,6 +1,7 @@
 package io.github.justinscottjenecke.job_application_manager.controller;
 
 import io.github.justinscottjenecke.job_application_manager.dto.job.CreateJobDto;
+import io.github.justinscottjenecke.job_application_manager.dto.job.JobDetailsDto;
 import io.github.justinscottjenecke.job_application_manager.model.Job;
 import io.github.justinscottjenecke.job_application_manager.model.enumerations.WorkModel;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
@@ -20,25 +21,28 @@ public class JobController {
         this.jobRepository = jobRepository;
     }
 
-    @GetMapping()
-    public List<Job> readAll() {
-        return jobRepository.findAll();
-    }
-
     @PostMapping()
     public ResponseEntity<String> create(@RequestBody CreateJobDto jobDto) {
-        Job job = new Job();
+        return new ResponseEntity<>("create", HttpStatusCode.valueOf(201));
+    }
 
-        job.setPosition(jobDto.position());
-        job.setCompany(jobDto.company());
-        job.setJobPostingUrl(jobDto.jobPostingUrl());
-        job.setLocation(jobDto.location());
-        job.setRequiredSkillsAndTools(jobDto.requirements());
-        job.setPostedSalary(jobDto.offeredSalary());
-        job.setWorkModel( WorkModel.valueOf( jobDto.workModel()) );
+    @GetMapping()
+    public List<Job> readAll() {
+        return null;
+    }
 
-        jobRepository.save(job);
+    @GetMapping("/{id}")
+    public Job read(@PathVariable Integer id) {
+        return null;
+    }
 
-        return new ResponseEntity<>("message", HttpStatusCode.valueOf(201));
+    @PutMapping("/{id}")
+    public ResponseEntity<String> update(@RequestBody JobDetailsDto dto, @PathVariable Integer id) {
+        return new ResponseEntity<>("update", HttpStatusCode.valueOf(200));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> delete(@PathVariable Integer id) {
+        return new ResponseEntity<>("delete", HttpStatusCode.valueOf(200));
     }
 }
