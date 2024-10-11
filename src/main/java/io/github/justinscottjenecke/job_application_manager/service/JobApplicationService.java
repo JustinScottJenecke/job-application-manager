@@ -6,6 +6,7 @@ import io.github.justinscottjenecke.job_application_manager.model.Application;
 import io.github.justinscottjenecke.job_application_manager.repository.IApplicationRepository;
 import io.github.justinscottjenecke.job_application_manager.repository.IJobRepository;
 import io.github.justinscottjenecke.job_application_manager.service.mappers.JobApplicationMapper;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -44,10 +45,22 @@ public class JobApplicationService {
         List<Application> allApplications = applicationRepository.findAll();
         List<JobApplicationDto> jobApplications = new ArrayList<>();
 
-        allApplications.stream().forEach(application -> {
+        allApplications.forEach(application -> {
             jobApplications.add(new JobApplicationDto(application.getJob(), application));
         });
 
         return jobApplications;
+    }
+
+    public JobApplicationDto readByApplicationId(Integer applicationId) {
+
+//        if (!applicationRepository.existsById(applicationId))
+//            throw new EntityNotFoundException("No job applications with id of: " + applicationId);
+
+        var application = applicationRepository.findById(applicationId).orElseThrow(
+                () -> new EntityNotFoundException("No job applications with id of: " + applicationId)
+        );
+
+        return new JobApplicationDto( application.getJob(), application);
     }
 }
